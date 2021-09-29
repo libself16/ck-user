@@ -21,7 +21,6 @@ const server = http.createServer((req, res) => {
     ip:${ip}\n
     country:${geo.country}\n
     city:${geo.city}\n
-    region:${geo.region}\n
     os:${ua.os},\n
     platform:${ua.platform},\n
     browser:${ua.browser},\n
