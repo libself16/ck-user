@@ -12,13 +12,16 @@ const server = http.createServer((req, res) => {
   console.log("ua", ua);
   console.log(req.socket.remoteAddress);
   const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress || null;
-  const geo = geoip.lookup(req.connection.remoteAddress);
+  const geo = geoip.lookup(ip);
   console.log("geo", geo);
 
   res.statusCode = 200;
   res.setHeader("Content-Type", "text/plain");
   res.end(`
     ip:${ip}\n
+    country:${geo.country}\n
+    city:${geo.city}\n
+    region:${geo.region}\n
     os:${ua.os},\n
     platform:${ua.platform},\n
     browser:${ua.browser},\n
