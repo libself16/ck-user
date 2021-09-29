@@ -4,8 +4,6 @@ const useragent = require("express-useragent");
 const geoip = require("geoip-lite");
 
 const server = http.createServer((req, res) => {
-  // const clientIp = reqIp.getClientIp(req);
-  // console.log("clientIp", clientIp);
 
   const source = req.headers["user-agent"],
     ua = useragent.parse(source);
@@ -39,7 +37,6 @@ const server = http.createServer((req, res) => {
         </body>
       </html>
   `);
-  // res.setHeader("Content-Type", "text/plain");
 });
 
 server.listen(port);
