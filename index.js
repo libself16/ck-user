@@ -1,7 +1,7 @@
 const http = require("http");
 const port = process.env.PORT || 5000;
 const useragent = require("express-useragent");
-const geoip = require("geoip-lite")
+const geoip = require("geoip-lite");
 
 const server = http.createServer((req, res) => {
   // const clientIp = reqIp.getClientIp(req);
@@ -16,16 +16,30 @@ const server = http.createServer((req, res) => {
   console.log("geo", geo);
 
   res.statusCode = 200;
-  res.setHeader("Content-Type", "text/plain");
+  res.writeHead(200, { "Content-Type": "text/html" });
   res.end(`
-    ip:${ip}\n
-    country:${geo.country}\n
-    city:${geo.city}\n
-    os:${ua.os},\n
-    platform:${ua.platform},\n
-    browser:${ua.browser},\n
-    source:${ua.source},\n
+      <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>ck-user</title>
+        </head>
+        <body>
+          <div>
+            <p>ip:${ip}<p>
+            <p>country:${geo?.country}<p>
+            <p>city:${geo?.city}<p>
+            <p>os:${ua?.os}<p>
+            <p>platform:${ua?.platform}<p>
+            <p>browser:${ua?.browser}<p>
+            <p>source:${ua?.source}<p>
+          </div>
+        </body>
+      </html>
   `);
+  // res.setHeader("Content-Type", "text/plain");
 });
 
 server.listen(port);
