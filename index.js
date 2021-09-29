@@ -7,11 +7,8 @@ const server = http.createServer((req, res) => {
 
   const source = req.headers["user-agent"],
     ua = useragent.parse(source);
-  console.log("ua", ua);
-  console.log(req.socket.remoteAddress);
   const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress || null;
   const geo = geoip.lookup(ip);
-  console.log("geo", geo);
 
   res.statusCode = 200;
   res.writeHead(200, { "Content-Type": "text/html" });
